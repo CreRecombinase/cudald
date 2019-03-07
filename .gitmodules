@@ -1,0 +1,10 @@
+[submodule "thirdparty/xsimd"]
+	path = thirdparty/xsimd
+	url = https://github.com/QuantStack/xsimd.git
+[submodule "thirdparty/xtl"]
+	path = thirdparty/xtl
+	url = https://github.com/QuantStack/xtl.git
+[submodule "thirdparty/xtensor"]
+	path = thirdparty/xtensor
+	url = https://github.com/QuantStack/xtensor.git
+
