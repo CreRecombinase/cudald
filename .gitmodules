@@ -8,3 +8,12 @@
 	path = thirdparty/xtensor
 	url = https://github.com/QuantStack/xtensor.git
 
+[submodule "thirdparty/zstd"]
+	path = thirdparty/zstd
+	url = https://github.com/facebook/zstd.git
+[submodule "thirdparty/HighFive"]
+	path = thirdparty/HighFive
+	url = https://github.com/BlueBrain/HighFive/
+[submodule "thirdparty/xtensor-io"]
+	path = thirdparty/xtensor-io
+	url = https://github.com/QuantStack/xtensor-io

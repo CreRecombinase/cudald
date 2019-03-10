@@ -1,0 +1,9 @@
+name: LD
+channels:
+  - conda-forge
+dependencies:
+  - xtensor-io
+  - hdf5
+  - highfive
+  - zstd
+  - cmake
