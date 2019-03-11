@@ -122,8 +122,8 @@ std::pair<std::vector<float>,std::vector<float> >id_check(const size_t p) {
     thrust::device_vector<float> deviceVector(n, 1.0f);
 
         cublasCreate(&handle);
-    auto theta = calc_theta(m);
-    auto dimensionSize=p;
+    float theta = calc_theta(m);
+    size_t dimensionSize=p;
     alpha = 1.0f / n;
     cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_T, dimensionSize, dimensionSize, n, &alpha,
                 device2DMatrixPtr, dimensionSize, device2DMatrixPtr, dimensionSize, &beta,
