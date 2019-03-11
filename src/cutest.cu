@@ -31,16 +31,16 @@ void ldshrink(float* S, const float* mapd, const int p, const float m, const flo
 {
     int k = threadIdx.x + blockIdx.x * blockDim.x;
 
-    int i = p - 2 - std::floor(std::sqrt(-8*k + 4*p*(p-1)-7)/2.0 - 0.5);
+    int i = p - 2 - floorf(sqrtf(-8*k + 4*p*(p-1)-7)/2.0 - 0.5);
     int j = k + i + 1 - p*(p-1)/2 + (p-i)*((p-i)-1)/2;
     if(i<p&&j<p) {
         float tsi = S[i * p + i];
         float tsj = S[j * p + j];
 
-        float shrinkage = std::exp(-(4 * ne * std::abs(mapd[j] - mapd[i]) / 100) / (2 * m));
+        float shrinkage = expf(-(4 * ne * fabsf(mapd[j] - mapd[i]) / 100) / (2 * m));
         shrinkage = shrinkage < cutoff ? 0 : shrinkage;
-        float tS = 1 / std::sqrt(tsi + 0.5 * theta * (1 - 0.5 * theta)) * ((1 - theta) * (1 - theta)) * S[i * p + j] *
-                  shrinkage * (1 / std::sqrt(tsj));
+        float tS = 1 / sqrtf(tsi + 0.5 * theta * (1 - 0.5 * theta)) * ((1 - theta) * (1 - theta)) * S[i * p + j] *
+                  shrinkage * (1 / sqrtf(tsj));
         S[j * p + i] = tS;
         S[i * p + j] = tS;
     }
@@ -61,7 +61,7 @@ __global__
 void idx_check(float* rowm,float *colm,const int p) {
     int k = threadIdx.x + blockIdx.x * blockDim.x;
 
-    int i = p - 2 - std::floor(std::sqrt(-8*k + 4*p*(p-1)-7)/2.0 - 0.5);
+    int i = p - 2 - floorf(sqrtf(-8*k + 4*p*(p-1)-7)/2.0 - 0.5);
     int j = k + i + 1 - p*(p-1)/2 + (p-i)*((p-i)-1)/2;
     if(i<p&&j<p) {
         rowm[i * p + j] = i;
