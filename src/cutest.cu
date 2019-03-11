@@ -34,12 +34,12 @@ void ldshrink(float* S, const float* mapd, const int p, const float m, const flo
     int i = p - 2 - std::floor(std::sqrt(-8*k + 4*p*(p-1)-7)/2.0 - 0.5);
     int j = k + i + 1 - p*(p-1)/2 + (p-i)*((p-i)-1)/2;
     if(i<p&&j<p) {
-        auto tsi = S[i * p + i];
-        auto tsj = S[j * p + j];
+        float tsi = S[i * p + i];
+        float tsj = S[j * p + j];
 
-        auto shrinkage = std::exp(-(4 * ne * std::abs(mapd[j] - mapd[i]) / 100) / (2 * m));
+        float shrinkage = std::exp(-(4 * ne * std::abs(mapd[j] - mapd[i]) / 100) / (2 * m));
         shrinkage = shrinkage < cutoff ? 0 : shrinkage;
-        auto tS = 1 / std::sqrt(tsi + 0.5 * theta * (1 - 0.5 * theta)) * ((1 - theta) * (1 - theta)) * S[i * p + j] *
+        float tS = 1 / std::sqrt(tsi + 0.5 * theta * (1 - 0.5 * theta)) * ((1 - theta) * (1 - theta)) * S[i * p + j] *
                   shrinkage * (1 / std::sqrt(tsj));
         S[j * p + i] = tS;
         S[i * p + j] = tS;
