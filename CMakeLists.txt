@@ -12,6 +12,7 @@ find_package(xtensor-io REQUIRED)
 find_package(HighFive REQUIRED)
 
 pkg_check_modules(ZSTD REQUIRED libzstd)
+message(STATUS "zstd_library:${ZSTD_LIBRARIES}")
 
 add_executable(cudald ${cpu_source_files} src/main.cpp src/zstd_h5plugin.c src/zstd_h5plugin.h)
 add_library(cudacov src/cutest.cu src/cudacov.hpp)
@@ -20,7 +21,7 @@ target_include_directories(cudald PUBLIC ${xtensor_INCLUDE_DIRS})
 target_include_directories(cudald PUBLIC ${ZSTD_INCLUDE_DIRS})
 
 target_link_libraries(cudald HighFive)
-target_link_libraries(cudald ${ZSTD_LIBRARIES})
+target_link_libraries(cudald PUBLIC ${ZSTD_LIBRARIES})
 
 target_link_libraries(cudald xtensor)
 target_link_libraries(cudald cudacov)
